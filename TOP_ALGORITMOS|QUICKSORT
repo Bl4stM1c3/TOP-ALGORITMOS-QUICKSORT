@@ -1,0 +1,48 @@
+#Posible solucion el ejericico 40 de https://retosdeprogramacion.com/ejercicios/
+#Implementa uno de los algoritmos de ordenación más famosos:
+# * el "Quick Sort", creado por C.A.R. Hoare.
+# * - Entender el funcionamiento de los algoritmos más utilizados de la historia
+# *   Nos ayuda a mejorar nuestro conocimiento sobre ingeniería de software.
+# *   Dedícale tiempo a entenderlo, no únicamente a copiar su implementación.
+# * - Esta es una nueva serie de retos llamada "TOP ALGORITMOS",
+# *   donde trabajaremos y entenderemos los más famosos de la historia.
+
+import time
+import random
+
+
+def quicksort(array):
+    
+    #Condicion si el array contiene solo un elemento
+    if len(array) < 2:
+        return array
+    
+    #Elegimos el pivote
+    pivote = random.choice(array)
+    
+    #Configuramos las listas de elementos
+    mayores = [x for x in array if x > pivote]
+    iguales = [x for x in array if x == pivote]
+    menores = [x for x in array if x < pivote]
+    
+    #Devolvemos el resultado meidante recursividad de funciones
+    return quicksort(menores)+iguales+quicksort(mayores)
+
+
+#EJEMPLO DE USO
+lista = [random.randint(1,1000) for _ in range(20)] #configuramos una lista de 20 miembros con valores entre 1 y 1000
+print(f"Lista original: {lista}")
+
+Lista original: [718, 316, 355, 314, 601, 919, 761, 555, 936, 739, 583, 423, 7, 577, 297, 986, 529, 413, 568, 74]
+
+#Medimos el tiempo de ejecucion del argoritmo
+start_time = time.time()
+lista_ordenada = quicksort(lista)
+end_time = time.time()
+
+print(f"La lista ordenada es: {lista_ordenada}")
+print(f"El tiempo de ejecucion ha sido de {end_time - start_time:.6f} segundos")
+
+#RESULTADO
+La lista ordenada es: [7, 74, 297, 314, 316, 355, 413, 423, 529, 555, 568, 577, 583, 601, 718, 739, 761, 919, 936, 986]
+El tiempo de ejecucion ha sido de 0.000000 segundos
